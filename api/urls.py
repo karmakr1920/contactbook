@@ -1,8 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
+
+router = DefaultRouter()
+router.register('contacts', views.ContactViewSet, basename='contacts')
 
 urlpatterns = [
     path('register/', views.register, name='register'),
-    path('contacts/', views.contact_list, name='contact_list_create'),
-    path('contacts/<int:pk>/', views.contact_detail,name='contact_detail_update_delete'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('', include(router.urls)),
 ]
